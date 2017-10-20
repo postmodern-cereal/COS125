@@ -1,2 +1,17 @@
 *.class
 *.zip
+*.swp
+
+#####Report Related BS#####
+*.pdf
+*.doc
+*.docx
+*.odt
+
+
+#####Images#####
+*.png
+*.gif
+*.jpg
+*.jpeg
+
