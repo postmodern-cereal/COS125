@@ -1,0 +1,64 @@
+Inventory Manager by Noah Ransom
+Select from menu:
+E - Edit
+I - Insert
+R - Remove
+D - Display Table
+Q - Quit
+
+Enter letter of choice: ID                     Stock   Unit Price  
+Mop                    15      5.99        
+Pail                   10      3.99        
+Hammer                 1       7.99        
+Wrench                 15      6.99        
+Pen                    50      0.99        
+Pad                    10      3.99        
+Calendar               0       2.99        
+Total Inventory: 331.99
+
+Enter letter of choice: Enter product: Enter amount to add (+) or subtract (-): Item Pail now has amount in stock 15
+
+Enter letter of choice: Enter product: Item q is not found.
+
+Enter letter of choice: Inventory Manager by Noah Ransom
+Select from menu:
+E - Edit
+I - Insert
+R - Remove
+D - Display Table
+Q - Quit
+
+Enter letter of choice: ID                     Stock   Unit Price  
+Mop                    15      5.99        
+Pail                   10      3.99        
+Hammer                 1       7.99        
+Wrench                 15      6.99        
+Pen                    50      0.99        
+Pad                    10      3.99        
+Calendar               0       2.99        
+Total Inventory: 331.99
+
+Enter letter of choice: Enter product: Enter amount to add (+) or subtract (-): Item Pail now has amount in stock 15
+
+Enter letter of choice: Enter product: Enter amount to add (+) or subtract (-): Item Pad now has amount in stock 5
+
+Enter letter of choice: Enter product: Item Bicycle is not found.
+
+Enter letter of choice: Enter new product ID, stock, and unit price: Item Screwdriver is inserted.
+
+Enter letter of choice: Enter new product ID, stock, and unit price: Item Wrench already exists.
+
+Enter letter of choice: Enter ID of product to remove: Item Pen is removed.
+
+Enter letter of choice: Enter ID of product to remove: Item Bucket does not exist.
+
+Enter letter of choice: ID                     Stock   Unit Price  
+Mop                    15      5.99        
+Pail                   15      3.99        
+Hammer                 1       7.99        
+Wrench                 15      6.99        
+Screwdriver            10      2.99        
+Pad                    5       3.99        
+Total Inventory: 312.39
+
+Enter letter of choice: 
