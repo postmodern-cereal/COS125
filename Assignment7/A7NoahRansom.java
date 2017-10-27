@@ -1,11 +1,11 @@
 //By Noah Ransom
+//Manages inventory by reading from a file and taking user input
 
 import java.io.*;
 import java.util.*;
 
 class A7NoahRansom
 {
-	//resize
 	public static int[] resize(int[] array, int newSize)
 	{
 		//POST: returns a new array of size newSize containing all the elements in array and in the same order
@@ -57,7 +57,7 @@ class A7NoahRansom
 	public static void insert(String[] names, String name, int[] stocks, int stock, double[] prices, double price, int size)
 	{
 		//POST: insert items int arrays
-		//Cannot resize in this method because java is pass by value and teh arrays will not stay resized when the function returns
+		//Cannot resize in this method because java is pass by value and the arrays will not stay resized when the function returns
 		names[size] = name;
 		stocks[size] = stock;
 		prices[size] = price;
@@ -87,6 +87,8 @@ class A7NoahRansom
 	public static int readFile(String fileName, String[] names, int[] stocks, double[] prices, int size) throws IOException
 	{
 		//POST: read all data from file fileName and populate the arrays, return new size
+		//This method does not work because java does pass by value, but it's a good function, so I left it in, but did not use it
+
 
 		Scanner reader = new Scanner(new FileReader(fileName)); //reads from the file
 		Scanner lineReader;										//parses the current line
@@ -132,6 +134,20 @@ class A7NoahRansom
 			System.err.println("Unable to write to file");
 		}
 		System.out.printf(toPrint);
+	}
+
+	public static void printLineFile(String toPrint)
+	{
+		//POST: writes toPrint to file only - lets you see what the user inputs by looking at the output file alone
+		try
+		{
+			PrintWriter writer = new PrintWriter(new FileOutputStream(new File("inventory_out.txt"), true));
+			writer.printf(toPrint);
+			writer.close();
+		} catch (IOException e)
+		{
+			System.err.println("Unable to write to file");
+		}
 	}
 
 	public static void displayTable(String[] names, int[] stocks, double[] prices, int size)
@@ -220,17 +236,20 @@ class A7NoahRansom
 		{
 			printLine("\nEnter letter of choice: ");
 			choice = scan.nextLine();
+			printLineFile(choice + "\n");
 			choice = choice.toUpperCase();
 			switch(choice.charAt(0))
 			{
 				case 'E':	printLine("Enter product: ");
 							input = scan.nextLine();
+							printLineFile(input + "\n");
 							input = input.trim();
 							if(sequentialSearch(names, size, input) >= 0)
 							{
 								int itemIndex = sequentialSearch(names, size, input);
 								printLine("Enter amount to add (+) or subtract (-): ");
 								int change = Integer.parseInt(scan.nextLine());
+								printLineFile(Integer.toString(change) + "\n");
 								stocks[itemIndex] += change;
 								printLine("Item " + input + " now has amount in stock " + Integer.toString(stocks[itemIndex]) + "\n");
 							}
@@ -242,6 +261,7 @@ class A7NoahRansom
 
 				case 'I':	printLine("Enter new product ID, stock, and unit price: ");
 				 			input = scan.nextLine();
+							printLineFile(input + "\n");
 							//the split method breaks the input into an array of strings delimited by spaces.
 							String name = input.split(" ")[0];
 							int stock = Integer.parseInt(input.split(" ")[1]);
@@ -268,6 +288,7 @@ class A7NoahRansom
 
 				case 'R':	printLine("Enter ID of product to remove: ");
 							input = scan.nextLine();
+							printLineFile(input + "\n");
 							remove(names, stocks, prices, input, size);
 							size--;
 							break;
