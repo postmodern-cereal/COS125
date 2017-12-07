@@ -9,7 +9,7 @@ class Textbook extends Book
 		this.course = new String();
 	}
 
-	public TextBook(String title, String isbn, String author, double price, String course)
+	public Textbook(String title, String isbn, String author, double price, String course)
 	{
 		//POST: initialize object with all fields filled
 		super(title, isbn, author, price);
@@ -34,4 +34,5 @@ class Textbook extends Book
 		return (this.getPrice() + this.getPrice() * 0.10);
 
 	}
+
 }

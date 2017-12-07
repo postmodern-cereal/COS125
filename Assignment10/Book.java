@@ -5,15 +5,14 @@ public abstract class Book
 	private String author;
 	private double price;		//wholesale price
 
-	public Book()
+	Book()
 	{
 		title = new String();
 		isbn = new String();
 		author = new String();
-		price = new double();
 	}
 
-	public Book(String title, String isbn, String author, double price)
+	Book(String title, String isbn, String author, double price)
 	{
 		//Parameterized constructor
 		this.title = title;
