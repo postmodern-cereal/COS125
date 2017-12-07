@@ -11,7 +11,7 @@ class A10NoahRansom
 		//POST: print the book in a nicely formatted way
 		//If tot is 0 or greater, then this book is the last of its type to print, so we have to print the summary line
 		NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.US);
-		final int LINEWIDTH = 50;
+		final int LINEWIDTH = 80;
 		int buffer = 4;						//num spaces between columns
 
 		//number of characters allotted to course, author, and price
@@ -43,7 +43,7 @@ class A10NoahRansom
 		//POST: print the book in a nicely formatted way
 		//If tot is 0 or greater, then this book is the last of its type to print, so we have to print the summary line
 		NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.US);
-		final int LINEWIDTH = 50;
+		final int LINEWIDTH = 80;
 		int buffer = 4;						//num spaces between columns
 
 		//number of characters allotted to course, author, and price
@@ -74,6 +74,9 @@ class A10NoahRansom
 
 	public static void main(String[] args)
 	{
+		NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.US);
+		String fmtSum = "%-" + 74 + "s";
+		String fmtPrice = "%-" + 6 + "s";
 		int capacity = 0;														//how many books are stored
 		String fileName = "books.txt";
 		Book[] books = new Book[50];
@@ -98,24 +101,23 @@ class A10NoahRansom
 				}
 				if(line.equals("Textbook"))
 				{
-					Textbook tmp = new Textbook();
-					tmp.setTitle(reader.nextLine());
-					tmp.setAuthor(reader.nextLine());
-					tmp.setIsbn(reader.nextLine());
-					tmp.setPrice(Double.parseDouble(reader.nextLine()));
-					tmp.setCourse(reader.nextLine());
-					books[i] = tmp;
+					String title = reader.nextLine();
+					String author = reader.nextLine();
+					String isbn = reader.nextLine();
+					double price = Double.parseDouble(reader.nextLine());
+					String course = reader.nextLine();
+					books[i] = new Textbook(title, isbn, author, price, course);
 					capacity++;
 				}
 				else if(line.equals("Tradebook"))
 				{
 					//must be tradebook
-					Tradebook tmp = new Tradebook();
-					tmp.setTitle(reader.nextLine());
-					tmp.setAuthor(reader.nextLine());
-					tmp.setIsbn(reader.nextLine());
-					tmp.setPrice(Double.parseDouble(reader.nextLine()));
-					tmp.setMajor(reader.nextLine());
+					String title = reader.nextLine();
+					String author = reader.nextLine();
+					String isbn = reader.nextLine();
+					double price = Double.parseDouble(reader.nextLine());
+					String major = reader.nextLine();
+					books[i] = new Tradebook(title, isbn, author, price, major);
 					capacity++;
 				}
 
@@ -145,25 +147,36 @@ class A10NoahRansom
 			}
 			else
 			{
-				numCourses++;
 				userCourses[numCourses] = course;
+				numCourses++;
 
 			}
 		}
+		System.out.println(userCourses[0]);
 		input.close();
-
+		System.out.println("capacity is " + capacity);
 		//now we find all of the relevant textbooks
 		System.out.println("\nList of textbooks:");
 		double totCost = 0.0;												//total cost of all textbooks
 		for(int i = 0; i < 50; i++)
 		{
 			//find textbooks with matching course names
-			for(String c: userCourses)
+			if(!(books[i] instanceof Textbook))
 			{
-				Textbook tmp = (Textbook)books[i];								//declare tmp to be a textbook variable and deal with abstract class weirdness
-				System.out.println(i);
-				System.out.println(tmp.getTitle());
-				if(c.equals((tmp.getCourse())))
+				if(i == capacity)
+				{
+					//line is 80 chars long, 6 chars of which is price
+
+					System.out.print(String.format(fmtSum, "Sum of retail book prices:"));
+					System.out.println(String.format(fmtPrice, currency.format(totCost)));
+
+				}
+				continue;
+			}
+			Textbook tmp = (Textbook)books[i];//declare tmp to be a textbook variable and deal with abstract class weirdness
+			for(int j = 0; j < numCourses; j++)
+			{
+				if(userCourses[j].equals((tmp.getCourse())))
 				{
 					if(i < capacity)
 					{
